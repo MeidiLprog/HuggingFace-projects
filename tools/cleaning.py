@@ -5,7 +5,7 @@ from smolagents import Tool
 import numpy as np
 
 class CleaningTool(Tool):
-    name = "Thoroughly clean your data"
+    name = "clean_data"
     description = ("Analyse data and/or remove duplicates, nans,"
                    "Variables types, encoding, columns suppressions"
                    )
@@ -46,7 +46,7 @@ class CleaningTool(Tool):
                     print("Imputation using Median\n")
                     df[col].fillna(df[col].median(),inplace=True)
 
-        low_var = [col for col in num_cols if df[col].nunique <= 1]
+        low_var = [col for col in num_cols if df[col].nunique() <= 1]
         if low_var:
             print(f"columns with a low variance {low_var} \n")
         print("Cleaning done\n")
