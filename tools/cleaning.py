@@ -52,7 +52,7 @@ class CleaningTool(Tool):
                     print("Imputation using Median\n")
                     df[col].fillna(df[col].median(),inplace=True)
 
-        num_cols = df.select_dtypes(exclude=["object"]).columns
+        num_cols = df.select_dtypes(exclude=["object","datetime64[ns]"]).columns
         if len(num_cols) > 0:
             scaler = StandardScaler()
             df[num_cols] = scaler.fit_transform(df[num_cols])
@@ -60,6 +60,13 @@ class CleaningTool(Tool):
         if low_var:
             print(f"columns with a low variance {low_var} \n")
             df.drop(columns=low_var,inplace=True)
+        
+        cat_col = df.select_dtypes(include="object").columns
+        if len(cat_col) > 0:
+            encoder = OneHotEncoder(sparse=False,drop='if_binary')
+            encode = encoder.fit_transform(df[cat_col])
+            encoded_df = pd.DataFrame(encode,columns=encoder.get_feature_names_out(cat_col))
+            df = pd.concat([df.drop(columns=cat_col).reset_index(drop=True), encoded_df], axis=1)
         print("Cleaning done\n")
 
         return df
