@@ -1,6 +1,6 @@
 import pandas as pd
 import seaborn as sn
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 from smolagents import Tool
 import numpy as np
 
@@ -38,7 +38,7 @@ class CleaningTool(Tool):
         else:
             print("No duplicates how lucky !\n")
 
-        num_cols = df.select_dtypes(exclude=["object"]).columns
+        
         
         for col in df.columns:
             if df[col].dtype == "object": #categorial variable
@@ -52,9 +52,14 @@ class CleaningTool(Tool):
                     print("Imputation using Median\n")
                     df[col].fillna(df[col].median(),inplace=True)
 
+        num_cols = df.select_dtypes(exclude=["object"]).columns
+        if len(num_cols) > 0:
+            scaler = StandardScaler()
+            df[num_cols] = scaler.fit_transform(df[num_cols])
         low_var = [col for col in num_cols if df[col].nunique() <= 1]
         if low_var:
             print(f"columns with a low variance {low_var} \n")
+            df.drop(columns=low_var,inplace=True)
         print("Cleaning done\n")
 
         return df
