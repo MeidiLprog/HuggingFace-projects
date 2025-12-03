@@ -6,11 +6,17 @@ import numpy as np
 
 class CleaningTool(Tool):
     name = "clean_data"
-    description = ("Analyse data and/or remove duplicates, nans,"
-                   "Variables types, encoding, columns suppressions"
-                   )
-    inputs = {"data" : "Pandas DataFrame"}
-    output_type = "Pandas DataFrame"
+    description = (
+        "Clean a pandas DataFrame: remove duplicates, fill missing values, "
+        "encode categorical columns, and detect low-variance features."
+    )
+    inputs = {
+        "data": {
+            "type": "object",
+            "description": "Pandas DataFrame or dict-like object to clean"
+        }
+    }
+    output_type = "object" 
 
 
     def forward(self,data):
@@ -19,7 +25,7 @@ class CleaningTool(Tool):
 
         print("First step: We are to take a look at our data\n")
         print(f"info {df.info()}\n")
-        print(f"info {df.describe(include='all',datetime_is_numeric=True)}\n")
+        print(f"info {df.describe(include='all')}\n")
 
         miss_info = df.isnull().sum()
         print("Missing values per column \n")
