@@ -1,7 +1,7 @@
 import numpy as np
 from smolagents import CodeAgent,LiteLLMModel
 from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
-from sklearn.metrics import f1_score,accuracy_score,recall_score,precision_score
+from sklearn.metrics import f1_score,accuracy_score,recall_score,precision_score,mean_squared_error,r2_score
 from sklearn.model_selection import GridSearchCV,train_test_split
 import pandas as pd
 
@@ -58,8 +58,23 @@ class TrainTool(Tool):
 
         grid = GridSearchCV(model,param_grid,cv=3,n_jobs=-1)
         grid.fit(X_train,y_train)
-        
+        print("GridSearch training\n")
 
+        best_model = grid.best_estimator_
+
+        y_pred = best_model.predict(X_test)
+        if problem == "Classification":
+            print(f"Accuracy: {accuracy_score(y_test,y_pred)}\n")
+            print(f"Precision: {precision_score(y_test,y_pred)}\n")
+            print(f"Recall: {recall_score(y_test,y_pred)}\n")
+            print(f"F1 Score: {f1_score(y_test,y_pred)}\n")
+
+        else:
+            print(f"RMSE: {mean_squared_error(y_test,y_pred,squared=False)}\n")
+            print(f"R²: {r2_score(y_test,y_pred,squared=False)}\n")
+
+
+            
         return "training done"        
 
 
