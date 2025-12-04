@@ -211,4 +211,4 @@ If you prefer running locally:
 
 Special thanks to **Hugging Face** for the SmolAgents framework, and the open-source community for making AI accessible.
 
-> “Why spend hours clea
+> “Why spend hours cleaning data when your agent can do it for you?”
