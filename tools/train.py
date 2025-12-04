@@ -13,7 +13,7 @@ class TrainTool(Tool):
     inputs = {
  
         "data" : {"type" : "object", "description" : "cleaned pandas dataframes"},
-        "target_name" : {"type" : "string", "description" : "Target column name (optional here)"}
+        "target_name" : {"type" : "string", "description" : "Target column name (optional here)", "nullable" : True}
         }
     
     output_type = "string"
