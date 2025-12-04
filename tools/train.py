@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier,RandomForestRegressor
 from sklearn.metrics import f1_score,accuracy_score,recall_score,precision_score,mean_squared_error,r2_score
 from sklearn.model_selection import GridSearchCV,train_test_split
 import pandas as pd
+from smolagents import Tool
 
 class TrainTool(Tool):
     name = "train_model"
@@ -12,7 +13,7 @@ class TrainTool(Tool):
     inputs = {
  
         "data" : {"type" : "object", "description" : "cleaned pandas dataframes"},
-        "target" : {"type" : "string", "description" : "Target column name (optional here)"}
+        "target_name" : {"type" : "string", "description" : "Target column name (optional here)"}
         }
     
     output_type = "string"
