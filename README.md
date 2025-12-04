@@ -94,7 +94,7 @@ Automatically trains a model based on target variable type:
 * Virtual environment recommended
 
 ```bash
-git clone https://github.com/<your-username>/datacleaner-agent.git
+git clone https://github.com/MeidiLprog/datacleaner-agent.git
 cd datacleaner-agent
 pip install -r requirements.txt
 ```
@@ -193,7 +193,7 @@ If you prefer running locally:
 
 **Lefki Meidi**
 🎓 Data Science & Machine Learning Engineer
-💬 [LinkedIn](https://www.linkedin.com) • [GitHub](https://github.com/<your-username>)
+💬 [LinkedIn](https://www.linkedin.com/in/lefkimeidi) • [GitHub](https://github.com/MeidiLprog) • [HuggingFace](https://huggingface.co/Meidilefki)
 
 ---
 
