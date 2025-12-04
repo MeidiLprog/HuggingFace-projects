@@ -50,14 +50,14 @@ class TrainTool(Tool):
 
         if problem == "Classification":
             model = RandomForestClassifier(random_state=42)
-            param_grid = {"n_estimators" : [10,35,40,100], 
-                          "max_depth" : [None,10,20,25,26,30,32,36]}
+            param_grid = {"n_estimators" : [1,2,3,4], 
+                          "max_depth" : [None,1,2,3,4,5,6,7]}
 
         else:
             model = RandomForestRegressor(random_state=42)
             param_grid = {
-                "n_estimators" : [10,35,40,100],
-                "max_depth" : [None,10,20,25,26,30,32,36]
+                "n_estimators" : [1,2,3,4],
+                "max_depth" : [None,1,2,3,4,5,6,7]
             }
 
         grid = GridSearchCV(model,param_grid,cv=3,n_jobs=-1)
