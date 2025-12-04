@@ -5,12 +5,13 @@
 
 import smolagents
 from smolagents import CodeAgent, LiteLLMModel
+
 from tools.inspect import InspectTool
 from tools.cleaning import CleaningTool
 from tools.train import TrainTool    
 
 def create_agent():
-    model = LiteLLMModel(model_id="ollama/qwen2:1.5b")
+    model = LiteLLMModel(model_id="huggingface/mistralai/Mistral-7B-Instruct-v0.2")
     agent = CodeAgent(
         model=model,
         tools=[InspectTool(),CleaningTool(),TrainTool()],
